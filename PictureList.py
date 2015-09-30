@@ -1,5 +1,5 @@
 import Tkinter as tk
-#import time
+import time
 
 def PictureList(app):
     if app.frame:
@@ -11,13 +11,15 @@ def PictureList(app):
     pictures = tk.Canvas(app.frame, width=app.master.winfo_screenwidth(), 
     height=app.master.winfo_screenheight(), bg=app.black, highlightthickness=0)
     pictures.pack()
-    pic = tk.PhotoImage(file="pics/ACCORDIO.gif")
-    piclabel = tk.Label(pictures, image=pic)
-    piclabel.image = pic # keep a reference!
-    piclabel.pack()
+    images = ["ACCORDIO", "AIRPLANE", "ALLIGATO", "ANCHOR", "ANT"]
+    for i in range(0, len(images)): #This is just a test
+        time.sleep(3)
+        pic = tk.PhotoImage(file="pics/" + images[i] + ".gif")
+        piclabel = tk.Label(pictures, image=pic)
+        piclabel.image = pic # keep a reference!
+        piclabel.pack()
     
-    pictures.create_window(app.master.winfo_screenwidth()/2, 
-                           app.master.winfo_screenheight()/2, 
-                           anchor="center", window=piclabel)
-
-#Test
+        pictures.create_window(app.master.winfo_screenwidth()/2, 
+                               app.master.winfo_screenheight()/2, 
+                               anchor="center", window=piclabel)
+        
