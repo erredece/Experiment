@@ -2,6 +2,7 @@ import Tkinter as tk # importing libraries
 import unravel as u #importing unravel
 import intro as i
 import unravelIntro as ui
+import PictureList as pic
 
 
 class Experiment: # Defining Fullscreen function.    
@@ -46,14 +47,17 @@ class Experiment: # Defining Fullscreen function.
         if self.Recording == True:
             self.stimulus.append(event.char)
         print "You just pressed " + str(self.stimulus)   
+    
+    def PictureList(self):
+        pic.PictureList(self)
 
 root = tk.Tk() #Calls the Root frame
 app=Experiment(root) # Fullscreen
 root.configure(bg=app.black) #Root settings, black background
 root.overrideredirect(1) # Hides header
 
-
-app.intro()
+app.PictureList()
+#app.intro()
 app.Recording = False
 #root.bind("<Key>", app.unravel)
 
