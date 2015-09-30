@@ -19,3 +19,5 @@ def PictureList(app):
     pictures.create_window(app.master.winfo_screenwidth()/2, 
                            app.master.winfo_screenheight()/2, 
                            anchor="center", window=piclabel)
+
+#Test
