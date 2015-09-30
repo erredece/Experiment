@@ -13,7 +13,7 @@ def PictureList(app):
     pictures.pack()
     images = ["ACCORDIO", "AIRPLANE", "ALLIGATO", "ANCHOR", "ANT"]
     for i in range(0, len(images)): #This is just a test
-        time.sleep(3)
+        
         pic = tk.PhotoImage(file="pics/" + images[i] + ".gif")
         piclabel = tk.Label(pictures, image=pic)
         piclabel.image = pic # keep a reference!
