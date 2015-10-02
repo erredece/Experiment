@@ -122,4 +122,4 @@ def unravel(app):
             
             bot.create_window(screen_width/5-80, 50, width=80, height=100,
                               window=botright, anchor="center")
-    root.bind("<a>", unravelEngine)
+    root.bind("<Key>", unravelEngine)
