@@ -37,27 +37,30 @@ class Experiment: # Defining Fullscreen function.
 
     def intro(self):
         i.intro(self)
-    
-    def unravelIntro(self):
+        
+    def unravelIntro(self, event):
         ui.intro(self)
-        print "Yo"
+        print "Yo" 
     
     def unravel(self, event):
         u.unravel(self) # Calling the unravel function
-        if self.Recording == True:
-            self.stimulus.append(event.char)
+
+    def keyRecord(self, event):
+        self.stimulus = event.char
         print "You just pressed " + str(self.stimulus)   
     
     def PictureList(self):
         pic.PictureList(self)
+    
+    unravelCounter = 1
 
 root = tk.Tk() #Calls the Root frame
 app=Experiment(root) # Fullscreen
 root.configure(bg=app.black) #Root settings, black background
 root.overrideredirect(1) # Hides header
 
-app.PictureList()
-#app.intro()
+#app.PictureList()
+app.intro()
 app.Recording = False
 #root.bind("<Key>", app.unravel)
 

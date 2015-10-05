@@ -23,4 +23,5 @@ def intro(app):
     c.create_window(windowwidth, windowheight, anchor="center", 
                     window=uInstructions) 
     
-    app.master.bind("<space>", app.unravel)
+    app.master.bind("<Key>", app.unravel)
+#    app.master.bind("<space>", app.unravel)

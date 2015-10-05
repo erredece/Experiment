@@ -27,4 +27,4 @@ def intro(app):
     introCanvas.create_window(windowwidth, windowheight, anchor="center",
                                window=introtext) 
     
-    app.master.bind("<space>", app.unravelIntro())
+    app.master.bind("<Key>", app.unravelIntro)

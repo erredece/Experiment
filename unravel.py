@@ -5,6 +5,7 @@ UnravelFont = ("Helvetica 72 ") #Defining font for unravel
 
 def unravel(app):
     root = app.master
+    
     def unravelEngine(self):
             
         if app.frame:
@@ -122,4 +123,28 @@ def unravel(app):
             
             bot.create_window(screen_width/5-80, 50, width=80, height=100,
                               window=botright, anchor="center")
-    root.bind("<Key>", unravelEngine)
+           
+        print app.unravelCounter
+        
+        def recordKey(self, event): #WIP
+            x = event.char
+            print x
+            if x == "w":
+                print "blaw blaw blaw"
+            elif x == "a":
+                print "blaha blaha blaha"
+            elif x == "s":
+                print "blash blash blash"
+            elif x == "d":
+                print "blad blad blad"
+            else:
+                print x
+        
+        print recordKey.x
+        app.unravelCounter += 1
+        if app.unravelCounter <= 10:
+            app.master.bind("<Key>", unravelEngine)
+        else:
+            app.unravelCounter = 1
+            app.master.bind("<Key>", app.unravelIntro)
+    unravelEngine(app)
