@@ -126,21 +126,22 @@ def unravel(app):
            
         print app.unravelCounter
         
-        def recordKey(self, event): #WIP
+        def recordKey(self, event):
             x = event.char
             print x
-            if x == "w":
+            if x.lower() == "w":
                 print "blaw blaw blaw"
-            elif x == "a":
+            elif x.lower() == "a":
                 print "blaha blaha blaha"
-            elif x == "s":
+            elif x.lower() == "s":
                 print "blash blash blash"
-            elif x == "d":
+            elif x.lower() == "d":
                 print "blad blad blad"
             else:
                 print x
         
-        print recordKey.x
+        app.master.bind("<Key>", recordKey)
+
         app.unravelCounter += 1
         if app.unravelCounter <= 10:
             app.master.bind("<Key>", unravelEngine)
