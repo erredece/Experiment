@@ -56,7 +56,7 @@ class Experiment: # Defining Fullscreen function.
 
 root = tk.Tk() #Calls the Root frame
 app=Experiment(root) # Fullscreen
-root.configure(bg=app.black) #Root settings, black background
+root.configure(bg=app.black, cursor="none") #Root settings, black background
 root.overrideredirect(1) # Hides header
 
 #app.PictureList()
