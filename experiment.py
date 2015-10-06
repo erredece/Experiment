@@ -52,6 +52,9 @@ class Experiment: # Defining Fullscreen function.
     def PictureList(self):
         pic.PictureList(self)
     
+
+            
+    
     unravelCounter = 1
 
 root = tk.Tk() #Calls the Root frame
@@ -59,8 +62,8 @@ app=Experiment(root) # Fullscreen
 root.configure(bg=app.black, cursor="none") #Root settings, black background
 root.overrideredirect(1) # Hides header
 
-#app.PictureList()
-app.intro()
+app.PictureList()
+#app.intro()
 app.Recording = False
 #root.bind("<Key>", app.unravel)
 

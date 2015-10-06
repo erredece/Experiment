@@ -16,22 +16,25 @@ def PictureList(app):
     showPicCounter = 0
     pic = tk.PhotoImage(file="pics/" + images[showPicCounter] + ".gif")
     piclabel = tk.Label(pictures, image=pic)
-    
-    def showPic(piclabel):
-        def addOnePic():
-            global showPicCounter
-            showPicCounter += 1
-            piclabel.after(1000,addOnePic)
-            piclabel.config(image=pic)
-        addOnePic()
-        
-    showPic(piclabel)   
-    
+    piclabel.config(image=pic) 
     piclabel.image = pic # keep a reference!    
     
+
+    def addOnePic():
+        global showPicCounter
+        showPicCounter += 1
+        print showPicCounter
+    
+    showPics = True
+    
+    while showPics:
+        piclabel.after(1, addOnePic)
+       
+        if showPicCounter == 6:
+            showPics = False
+    
+    piclabel.pack()  
     pictures.create_window(app.master.winfo_screenwidth()/2, 
                                app.master.winfo_screenheight()/2, 
-                               anchor="center", window=piclabel)
-    piclabel.pack()    
-
-        
+                               anchor="center", window=piclabel)    
+    
