@@ -1,40 +1,51 @@
 import Tkinter as tk
-#import time
+import time
+
+showPicCounter = 0
+globalApp = None
 
 def PictureList(app):
-    global showPicCounter
-    if app.frame:
-        app.frame.destroy()
-        app.frame = tk.Frame(app.master, width=app.master.winfo_screenwidth(), 
-            height=app.master.winfo_screenheight())
-        app.frame.pack()
+    global globalApp
+    globalApp = app
     
-    pictures = tk.Canvas(app.frame, width=app.master.winfo_screenwidth(), 
-    height=app.master.winfo_screenheight(), bg=app.black, highlightthickness=0)
+    '''while showPics:
+        elapsedTime = globalApp.elapsedTime
+        
+        if elapsedTime % 3 == 0:
+            addOnePic()
+            
+        if showPicCounter == 3:
+            showPics = False'''
+    
+    tick()
+
+def tick():
+    global showPicCounter
+    showPicCounter += 1
+    
+    if globalApp.frame:
+        globalApp.frame.destroy()
+        globalApp.frame = tk.Frame(globalApp.master, width=globalApp.master.winfo_screenwidth(), 
+            height=globalApp.master.winfo_screenheight())
+        globalApp.frame.pack()
+    
+    pictures = tk.Canvas(globalApp.frame, width=globalApp.master.winfo_screenwidth(), 
+    height=globalApp.master.winfo_screenheight(), bg=globalApp.black, highlightthickness=0)
     pictures.pack()
     images = ["ACCORDIO", "AIRPLANE", "ALLIGATO", "ANCHOR", "ANT"]
-    showPicCounter = 0
-    pic = tk.PhotoImage(file="pics/" + images[showPicCounter] + ".gif")
+    
+    pic = tk.PhotoImage(file="pics/" + images[showPicCounter - 1] + ".gif")
     piclabel = tk.Label(pictures, image=pic)
     piclabel.config(image=pic) 
-    piclabel.image = pic # keep a reference!    
-    
-
-    def addOnePic():
-        global showPicCounter
-        showPicCounter += 1
-        print showPicCounter
-    
-    showPics = True
-    
-    while showPics:
-        piclabel.after(1, addOnePic)
-       
-        if showPicCounter == 6:
-            showPics = False
-    
+    piclabel.image = pic # keep a reference!  
     piclabel.pack()  
-    pictures.create_window(app.master.winfo_screenwidth()/2, 
-                               app.master.winfo_screenheight()/2, 
-                               anchor="center", window=piclabel)    
     
+    pictures.create_window(globalApp.master.winfo_screenwidth()/2, 
+                               globalApp.master.winfo_screenheight()/2, 
+                               anchor="center", window=piclabel)  
+    
+    if showPicCounter < 5:
+        globalApp.master.after(3000, tick)
+    else:
+        globalApp.master.destroy()
+        

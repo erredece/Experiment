@@ -1,27 +1,26 @@
 import Tkinter as tk
 
-def intro(app):
-    
+def intro(globalApp):
 
-    if app.frame:
-        app.frame.destroy()
-        app.frame = tk.Frame(app.master, width=app.master.winfo_screenwidth(), 
-            height=app.master.winfo_screenheight())
-        app.frame.pack()
+    if globalApp.frame:
+        globalApp.frame.destroy()
+        globalApp.frame = tk.Frame(globalApp.master, width=globalApp.master.winfo_screenwidth(), 
+            height=globalApp.master.winfo_screenheight())
+        globalApp.frame.pack()
     
-    c = tk.Canvas(app.frame, width=app.master.winfo_screenwidth(), 
-    height=app.master.winfo_screenheight(), bg=app.black, highlightthickness=0)
+    c = tk.Canvas(globalApp.frame, width=globalApp.master.winfo_screenwidth(), 
+    height=globalApp.master.winfo_screenheight(), bg=globalApp.black, highlightthickness=0)
     
     c.pack()
     
     uInstructions = tk.Label(c, text="PLACEHOLDER",
-    bg= app.black, fg = app.white, font="Helvetica 18", anchor="center")
+    bg= globalApp.black, fg = globalApp.white, font="Helvetica 18", anchor="center")
     
-    windowwidth = app.master.winfo_screenwidth()/2
-    windowheight = app.master.winfo_screenheight()/2
+    windowwidth = globalApp.master.winfo_screenwidth()/2
+    windowheight = globalApp.master.winfo_screenheight()/2
     
     c.create_window(windowwidth, windowheight, anchor="center", 
                     window=uInstructions) 
     
-    app.master.bind("<Key>", app.unravel)
-#    app.master.bind("<space>", app.unravel)
+    globalApp.master.bind("<Key>", globalApp.unravel)
+#    globalApp.master.bind("<space>", globalApp.unravel)

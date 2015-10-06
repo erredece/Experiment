@@ -23,7 +23,7 @@ class Experiment: # Defining Fullscreen function.
 
 root = tk.Tk() #Calls the Root frame
 root.configure(bg=black) #Root settings, black background 
-app=Experiment(root) # Fullscreen
+globalApp=Experiment(root) # Fullscreen
 root.overrideredirect(1) # Hides header
 
 u.unravel(root) #Calling the unravel function    
