@@ -11,7 +11,7 @@ class Experiment: # Defining Fullscreen function.
         
         self.master = master
         pad = 0
-        self._geom = '200x200+0+0'
+        self._geom = '1000x500+0+0'
         master.geometry("{0}x{1}+0+0".format(
             master.winfo_screenwidth()-pad, master.winfo_screenheight()-pad))
         master.bind('<F1>', self.toggle_geom)     # This sets the key to toggle 
@@ -40,15 +40,11 @@ class Experiment: # Defining Fullscreen function.
         i.intro(self)
         
     def unravelIntro(self, event):
-        ui.intro(self)
-        print "Yo" 
+        ui.intro(self) 
     
     def unravel(self, event):
         u.unravel(self) # Calling the unravel function
 
-    def keyRecord(self, event):
-        self.stimulus = event.char
-        print "You just pressed " + str(self.stimulus)   
     
     start = time.time()
     elapsedTime = 0
@@ -65,8 +61,8 @@ globalApp=Experiment(root) # Fullscreen
 root.configure(bg=globalApp.black, cursor="none") #Root settings, black background
 root.overrideredirect(1) # Hides header
 
-globalApp.PictureList()
-#globalApp.intro()
+#globalApp.PictureList()
+globalApp.intro()
 globalApp.Recording = False
 
 #root.bind("<Key>", globalApp.unravel)

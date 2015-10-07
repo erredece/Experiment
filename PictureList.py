@@ -1,5 +1,4 @@
 import Tkinter as tk
-import time
 
 showPicCounter = 0
 globalApp = None
@@ -7,16 +6,6 @@ globalApp = None
 def PictureList(app):
     global globalApp
     globalApp = app
-    
-    '''while showPics:
-        elapsedTime = globalApp.elapsedTime
-        
-        if elapsedTime % 3 == 0:
-            addOnePic()
-            
-        if showPicCounter == 3:
-            showPics = False'''
-    
     tick()
 
 def tick():

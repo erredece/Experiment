@@ -2,12 +2,24 @@ import Tkinter as tk #Importing Tkinter
 from random import randint, choice
 
 UnravelFont = ("Helvetica 72 ") #Defining font for unravel
-unravelCounter = 1
+unravelCounter = 0
 key = ""
 globalApp = None
+UnravelStep = 1
+stimulus = []
+memoryfontleft = []
+memoryfontright = []
+memorytextleft = []
+memorytextright = []
+memoryposleft = []
+memoryposright = [] 
+memorycolourleft = []
+memorycolourright = []
 
 def keyIsPressed(event):
     global key
+    global UnravelStep
+    global unravelCounter
     key = event.char
     
     global unravelCounter
@@ -15,8 +27,9 @@ def keyIsPressed(event):
         unravelEngine()
         
     else:
-        unravelCounter = 1
         globalApp.unravelIntro(globalApp)
+        UnravelStep = 1
+        unravelCounter = 0
 
 def unravel(app):
     global globalApp
@@ -24,14 +37,15 @@ def unravel(app):
     
     globalApp.master.bind("<Key>", keyIsPressed)
     unravelEngine()
-    
+
 def unravelEngine():
     
     global globalApp
     if globalApp.frame:
         globalApp.Recording = False
         globalApp.frame.destroy()
-        globalApp.frame = tk.Frame(globalApp.master, width=globalApp.master.winfo_screenwidth(), 
+        globalApp.frame = tk.Frame(globalApp.master, 
+            width=globalApp.master.winfo_screenwidth(), 
             height=globalApp.master.winfo_screenheight())
         globalApp.frame.pack()
         
@@ -39,19 +53,23 @@ def unravelEngine():
     screen_width = globalApp.master.winfo_screenwidth() #Calculates the screen width
     screen_height = globalApp.master.winfo_screenheight() #Idem, height
            
-    top = tk.Canvas(globalApp.frame, width=screen_width/5, height=screen_height/3+50, 
+    top = tk.Canvas(globalApp.frame, width=screen_width/5, 
+                    height=screen_height/3+50, 
                     bg=globalApp.black, highlightthickness=0) #Top Canvas      
     top.pack()
 
-    mid = tk.Canvas(globalApp.frame, width=screen_width/5, height=screen_height/4 - 60 , 
+    mid = tk.Canvas(globalApp.frame, width=screen_width/5, 
+                    height=screen_height/4 - 60 , 
                     bg=globalApp.black, highlightthickness=0) #Mid canvas
     mid.create_rectangle(screen_width/5 - 20, screen_height/4 - 60,
-                          10, 10, fill=globalApp.black, outline= globalApp.white,
+                          10, 10, fill=globalApp.black, 
+                          outline= globalApp.white,
                           width=4) #Creates rectangle  
 
     mid.pack()
     
-    bot = tk.Canvas(globalApp.frame, width=screen_width/5, height=screen_height/3, 
+    bot = tk.Canvas(globalApp.frame, width=screen_width/5, 
+                    height=screen_height/3, 
                     bg=globalApp.black, highlightthickness=0)
     bot.pack()
     
@@ -63,7 +81,8 @@ def unravelEngine():
     positionleft = positions[randint(0, len(positions)-1)]  
     textleft = characters[randint(0,
                                   len(characters)-1)] #Test for the text in box
-    colourleft = choice([globalApp.white, globalApp.white, globalApp.yellow, globalApp.red])
+    colourleft = choice([globalApp.white, globalApp.white, 
+                         globalApp.yellow, globalApp.red])
     fontleft = choice(["", "", "italic", "underline"]) #Duplicated to have 50%
            
     if positionleft == 1: 
@@ -145,22 +164,216 @@ def unravelEngine():
                           window=botright, anchor="center")
 
     global key
-    if key.lower() == "w":
-        print "blaw blaw blaw"
-    elif key.lower() == "a":
-        print "blaha blaha blaha"
-    elif key.lower() == "s":
-        print "blash blash blash"
-    elif key.lower() == "d":
-        print "blad blad blad"
-    else:
-        print key
-
     global unravelCounter
-    unravelCounter += 1
-
-    '''if globalApp.unravelCounter <= 10:
-        globalApp.master.bind("<Key>", unravelEngine)
+    global UnravelStep
+    global stimulus
+    global memoryfontleft
+    global memoryfontright
+    global memoryposleft
+    global memoryposright
+    global memorytextleft
+    global memorytextright
+    global memorycolourleft
+    global memorycolourright
+    
+    memoryfontleft.append(fontleft)
+    memoryfontright.append(fontright)
+    memoryposleft.append(positionleft)
+    memoryposright.append(positionright)
+    memorytextleft.append(textleft)
+    memorytextright.append(textright)
+    memorycolourleft.append(colourleft)
+    memorycolourright.append(colourright)
+    
+    if key == "u":
+        if UnravelStep == 1: 
+            if memoryfontleft[unravelCounter - 1] == "underline":
+                stimulus.append(1)
+            elif memoryfontright[unravelCounter - 1] == "underline":
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+        UnravelStep = 2
+    elif key =="i":
+        if UnravelStep == 1:
+            if memoryfontleft[unravelCounter - 1] == "italic":
+                stimulus.append(1)
+            elif memoryfontright[unravelCounter - 1] == "italic":
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+        UnravelStep = 2
+    elif key == "n":
+        if UnravelStep == 2:
+            if memorytextleft[unravelCounter -1] == "A":
+                stimulus.append(1)
+            elif memorytextleft[unravelCounter -1] == "B":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "A":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "B":
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+    elif key == "f":
+        if UnravelStep == 2:
+            if memorytextleft[unravelCounter -1] == "U":
+                stimulus.append(1)
+            elif memorytextleft[unravelCounter -1] == "X":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "U":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "X":
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+    elif key == "r":
+        if UnravelStep == 3:
+            if memorycolourleft[unravelCounter - 1] == globalApp.red: 
+                stimulus.append(1)
+            elif memorycolourright[unravelCounter - 1] == globalApp.red: 
+                stimulus.append(1)   
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+    elif key == "y":
+        if UnravelStep == 3:
+            if memorycolourleft[unravelCounter - 1] == globalApp.yellow: 
+                stimulus.append(1)
+            elif memorycolourright[unravelCounter - 1] == globalApp.yellow: 
+                stimulus.append(1)   
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+    elif key == "a":
+        if UnravelStep == 4:
+            if memoryposleft[unravelCounter - 1] == 1:
+                stimulus.append(1)
+            elif memoryposright[unravelCounter - 1] == 1:
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else: 
+            stimulus.append(0)
+    elif key == "b":
+        if UnravelStep == 4:
+            if memoryposleft[unravelCounter - 1] == 3:
+                stimulus.append(1)
+            elif memoryposright[unravelCounter - 1] == 3:
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else: 
+            stimulus.append(0)
+    elif key == "v":
+        if UnravelStep == 5:
+            if memorytextleft[unravelCounter -1] == "A":
+                stimulus.append(1)
+            elif memorytextleft[unravelCounter -1] == "U":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "A":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "U":
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+    elif key == "c":
+        if UnravelStep == 5:
+            if memorytextleft[unravelCounter -1] == "B":
+                stimulus.append(1)
+            elif memorytextleft[unravelCounter -1] == "X":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "B":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "X":
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+    elif key == "e":
+        if UnravelStep == 6:
+            if memorytextleft[unravelCounter -1] == "2":
+                stimulus.append(1)
+            elif memorytextleft[unravelCounter -1] == "8":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "2":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "8":
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+    elif key == "o":
+        if UnravelStep == 6:
+            if memorytextleft[unravelCounter -1] == "1":
+                stimulus.append(1)
+            elif memorytextleft[unravelCounter -1] == "9":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "1":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "9":
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+            
+    elif key == "l":
+        if UnravelStep == 7:
+            if memorytextleft[unravelCounter -1] == "1":
+                stimulus.append(1)
+            elif memorytextleft[unravelCounter -1] == "2":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "1":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "2":
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
+    elif key == "m":
+        if UnravelStep == 7:
+            if memorytextleft[unravelCounter -1] == "8":
+                stimulus.append(1)
+            elif memorytextleft[unravelCounter -1] == "9":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "8":
+                stimulus.append(1)
+            elif memorytextright[unravelCounter -1] == "9":
+                stimulus.append(1)
+            else:
+                stimulus.append(0)
+        else:
+            stimulus.append(0)
     else:
-        globalApp.unravelCounter = 1
-        globalApp.master.bind("<Key>", globalApp.unravelIntro)'''
+        stimulus.append(0)
+    if unravelCounter == 0:
+        stimulus = []
+    
+    
+    unravelCounter += 1
+    print "Unravel Counter = " + str(unravelCounter)
+    print "Key = " + key
+    print stimulus
+    print "Step = " + str(UnravelStep)
+    '''print memoryposleft
+    print memoryposright
+    print memorytextleft
+    print memorytextright
+    print memorycolourleft
+    print memorycolourright'''
