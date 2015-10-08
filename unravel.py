@@ -1,11 +1,11 @@
 import Tkinter as tk #Importing Tkinter
-from random import randint, choice
+from random import randint, choice #Importing random
 
 UnravelFont = ("Helvetica 72 ") #Defining font for unravel
 unravelCounter = 0
 key = ""
 globalApp = None
-UnravelStep = 1
+UnravelStep = 0
 stimulus = []
 memoryfontleft = []
 memoryfontright = []
@@ -17,28 +17,35 @@ memorycolourleft = []
 memorycolourright = []
 
 def keyIsPressed(event):
+    ''' Records the pressed key and calls the unravelBuilder function each time
+    the key is pressed, which generates a new layout to then call the
+    unravelEngine function'''
     global key
     global UnravelStep
     global unravelCounter
     key = event.char
     
     global unravelCounter
-    if (unravelCounter <= 10):
-        unravelEngine()
+    if (unravelCounter <= 13): #Number of runs - 1
+        unravelBuilder()
         
     else:
+        unravelEngine()
         globalApp.unravelIntro(globalApp)
         UnravelStep = 1
         unravelCounter = 0
 
 def unravel(app):
+    '''This is the main process function called by the Experiment Class'''
     global globalApp
     globalApp = app
     
     globalApp.master.bind("<Key>", keyIsPressed)
-    unravelEngine()
+    unravelBuilder()
 
-def unravelEngine():
+def unravelBuilder():
+    '''Builds the layout for the UNRAVEL task, as well as storing the values
+    into memory so they can then be compared by the unravelEngine function'''
     
     global globalApp
     if globalApp.frame:
@@ -163,6 +170,30 @@ def unravelEngine():
         bot.create_window(screen_width/5-80, 50, width=80, height=100,
                           window=botright, anchor="center")
 
+    unravelEngine()
+    
+    global memoryfontleft
+    global memoryfontright
+    global memoryposleft
+    global memoryposright
+    global memorytextleft
+    global memorytextright
+    global memorycolourleft
+    global memorycolourright
+    memoryfontleft.append(fontleft)
+    memoryfontright.append(fontright)
+    memoryposleft.append(positionleft)
+    memoryposright.append(positionright)
+    memorytextleft.append(textleft)
+    memorytextright.append(textright)
+    memorycolourleft.append(colourleft)
+    memorycolourright.append(colourright)   
+
+def unravelEngine():
+    ''' Compares all the key inputs to the values present on screen, recording
+    the responses as correct or not and moves to the next step. If the person
+    presses a key from a different step, it will also move to the step
+    following the one the participant thought s/he was'''
     global key
     global unravelCounter
     global UnravelStep
@@ -175,15 +206,6 @@ def unravelEngine():
     global memorytextright
     global memorycolourleft
     global memorycolourright
-    
-    memoryfontleft.append(fontleft)
-    memoryfontright.append(fontright)
-    memoryposleft.append(positionleft)
-    memoryposright.append(positionright)
-    memorytextleft.append(textleft)
-    memorytextright.append(textright)
-    memorycolourleft.append(colourleft)
-    memorycolourright.append(colourright)
     
     if key == "u":
         if UnravelStep == 1: 
@@ -221,6 +243,7 @@ def unravelEngine():
                 stimulus.append(0)
         else:
             stimulus.append(0)
+        UnravelStep = 3
     elif key == "f":
         if UnravelStep == 2:
             if memorytextleft[unravelCounter -1] == "U":
@@ -235,6 +258,7 @@ def unravelEngine():
                 stimulus.append(0)
         else:
             stimulus.append(0)
+        UnravelStep = 3
     elif key == "r":
         if UnravelStep == 3:
             if memorycolourleft[unravelCounter - 1] == globalApp.red: 
@@ -245,6 +269,7 @@ def unravelEngine():
                 stimulus.append(0)
         else:
             stimulus.append(0)
+        UnravelStep = 4
     elif key == "y":
         if UnravelStep == 3:
             if memorycolourleft[unravelCounter - 1] == globalApp.yellow: 
@@ -255,6 +280,7 @@ def unravelEngine():
                 stimulus.append(0)
         else:
             stimulus.append(0)
+        UnravelStep = 4
     elif key == "a":
         if UnravelStep == 4:
             if memoryposleft[unravelCounter - 1] == 1:
@@ -265,6 +291,7 @@ def unravelEngine():
                 stimulus.append(0)
         else: 
             stimulus.append(0)
+        UnravelStep = 5
     elif key == "b":
         if UnravelStep == 4:
             if memoryposleft[unravelCounter - 1] == 3:
@@ -275,6 +302,7 @@ def unravelEngine():
                 stimulus.append(0)
         else: 
             stimulus.append(0)
+        UnravelStep = 5
     elif key == "v":
         if UnravelStep == 5:
             if memorytextleft[unravelCounter -1] == "A":
@@ -289,6 +317,7 @@ def unravelEngine():
                 stimulus.append(0)
         else:
             stimulus.append(0)
+        UnravelStep = 6
     elif key == "c":
         if UnravelStep == 5:
             if memorytextleft[unravelCounter -1] == "B":
@@ -303,6 +332,7 @@ def unravelEngine():
                 stimulus.append(0)
         else:
             stimulus.append(0)
+        UnravelStep = 6
     elif key == "e":
         if UnravelStep == 6:
             if memorytextleft[unravelCounter -1] == "2":
@@ -317,6 +347,7 @@ def unravelEngine():
                 stimulus.append(0)
         else:
             stimulus.append(0)
+        UnravelStep = 7
     elif key == "o":
         if UnravelStep == 6:
             if memorytextleft[unravelCounter -1] == "1":
@@ -331,6 +362,7 @@ def unravelEngine():
                 stimulus.append(0)
         else:
             stimulus.append(0)
+        UnravelStep = 7
             
     elif key == "l":
         if UnravelStep == 7:
@@ -346,6 +378,7 @@ def unravelEngine():
                 stimulus.append(0)
         else:
             stimulus.append(0)
+        UnravelStep = 1
     elif key == "m":
         if UnravelStep == 7:
             if memorytextleft[unravelCounter -1] == "8":
@@ -360,20 +393,15 @@ def unravelEngine():
                 stimulus.append(0)
         else:
             stimulus.append(0)
+        UnravelStep = 1
     else:
         stimulus.append(0)
+        if UnravelStep < 7:
+            UnravelStep += 1
+        else:
+            UnravelStep = 1
     if unravelCounter == 0:
         stimulus = []
-    
-    
+        
     unravelCounter += 1
-    print "Unravel Counter = " + str(unravelCounter)
-    print "Key = " + key
     print stimulus
-    print "Step = " + str(UnravelStep)
-    '''print memoryposleft
-    print memoryposright
-    print memorytextleft
-    print memorytextright
-    print memorycolourleft
-    print memorycolourright'''

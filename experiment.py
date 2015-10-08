@@ -1,4 +1,4 @@
-import Tkinter as tk # importing libraries
+import Tkinter as tk # importing Tkinter, change for tkinter when using Python 3
 import unravel as u #importing unravel
 import intro as i
 import unravelIntro as ui
@@ -8,7 +8,7 @@ import time
 
 class Experiment: # Defining Fullscreen function.    
     def __init__(self, master, **kwargs):
-        
+        '''Initializing function'''
         self.master = master
         pad = 0
         self._geom = '1000x500+0+0'
@@ -27,9 +27,6 @@ class Experiment: # Defining Fullscreen function.
     red = "#f00" #Defining red
     yellow = "#ff0" #Defining yellow
 
-    Recording = False
-    stimulus = []
-
     def toggle_geom(self,event): 
         geom=self.master.winfo_geometry()
         print(geom,self._geom)
@@ -45,7 +42,7 @@ class Experiment: # Defining Fullscreen function.
     def unravel(self, event):
         u.unravel(self) # Calling the unravel function
 
-    
+    '''This sets a clock to use on the timed parts of the experiment'''
     start = time.time()
     elapsedTime = 0
     def getElapsedTime(self):
@@ -63,7 +60,6 @@ root.overrideredirect(1) # Hides header
 
 #globalApp.PictureList()
 globalApp.intro()
-globalApp.Recording = False
 
 #root.bind("<Key>", globalApp.unravel)
 
