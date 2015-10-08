@@ -38,7 +38,8 @@ class Experiment: # Defining Fullscreen function.
         
     def unravelIntro(self, event):
         ui.intro(self) 
-    
+
+        
     def unravel(self, event):
         u.unravel(self) # Calling the unravel function
 
@@ -46,7 +47,6 @@ class Experiment: # Defining Fullscreen function.
     start = time.time()
     elapsedTime = 0
     def getElapsedTime(self):
-        print "called"
         self.elapsedTime += 1
         self.master.after(1000, self.getElapsedTime)
     
@@ -60,7 +60,5 @@ root.overrideredirect(1) # Hides header
 
 #globalApp.PictureList()
 globalApp.intro()
-
-#root.bind("<Key>", globalApp.unravel)
 
 root.mainloop() #Runs root

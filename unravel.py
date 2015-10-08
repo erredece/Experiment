@@ -1,5 +1,6 @@
 import Tkinter as tk #Importing Tkinter
 from random import randint, choice #Importing random
+import score
 
 UnravelFont = ("Helvetica 72 ") #Defining font for unravel
 unravelCounter = 0
@@ -31,7 +32,7 @@ def keyIsPressed(event):
         
     else:
         unravelEngine()
-        globalApp.unravelIntro(globalApp)
+        score.unravel(globalApp, stimulus)
         UnravelStep = 1
         unravelCounter = 0
 
@@ -404,4 +405,3 @@ def unravelEngine():
         stimulus = []
         
     unravelCounter += 1
-    print stimulus

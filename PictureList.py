@@ -10,18 +10,22 @@ def PictureList(app):
 
 def tick():
     global showPicCounter
-    showPicCounter += 1
-    
+    images = ["ACCORDIO", "AIRPLANE", "ALLIGATO", "ANCHOR", "ANT"]
+    #Please note that the first image to be reproduced will be the last one of
+    #the array. 
     if globalApp.frame:
         globalApp.frame.destroy()
-        globalApp.frame = tk.Frame(globalApp.master, width=globalApp.master.winfo_screenwidth(), 
+        globalApp.frame = tk.Frame(globalApp.master, 
+            width=globalApp.master.winfo_screenwidth(), 
             height=globalApp.master.winfo_screenheight())
         globalApp.frame.pack()
     
-    pictures = tk.Canvas(globalApp.frame, width=globalApp.master.winfo_screenwidth(), 
-    height=globalApp.master.winfo_screenheight(), bg=globalApp.black, highlightthickness=0)
+    pictures = tk.Canvas(globalApp.frame, 
+                         width=globalApp.master.winfo_screenwidth(), 
+                         height=globalApp.master.winfo_screenheight(), 
+                         bg=globalApp.black, highlightthickness=0)
     pictures.pack()
-    images = ["ACCORDIO", "AIRPLANE", "ALLIGATO", "ANCHOR", "ANT"]
+    
     
     pic = tk.PhotoImage(file="pics/" + images[showPicCounter - 1] + ".gif")
     piclabel = tk.Label(pictures, image=pic)
@@ -33,8 +37,10 @@ def tick():
                                globalApp.master.winfo_screenheight()/2, 
                                anchor="center", window=piclabel)  
     
-    if showPicCounter < 5:
+    if showPicCounter <= len(images) -1 :
+        showPicCounter += 1
         globalApp.master.after(3000, tick)
     else:
-        globalApp.master.destroy()
-        
+        showPicCounter = 0
+        globalApp.unravel(globalApp)
+    print showPicCounter
