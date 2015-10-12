@@ -24,6 +24,7 @@ def keyIsPressed(event):
     global key
     global UnravelStep
     global unravelCounter
+    global globalApp
     key = event.char
     
     global unravelCounter
@@ -35,6 +36,18 @@ def keyIsPressed(event):
         score.unravel(globalApp, stimulus)
         UnravelStep = 1
         unravelCounter = 0
+        if globalApp.experimentalBlock == 3:
+            globalApp.data1 = stimulus
+        elif globalApp.experimentalBlock == 4:
+            globalApp.data2 = stimulus
+        elif globalApp.experimentalBlock == 5:
+            globalApp.data3 = stimulus
+        elif globalApp.experimentalBlock == 6:
+            globalApp.data4 = stimulus
+        else:
+            pass
+        globalApp.experimentalBlock += 1
+        
 
 def unravel(app):
     '''This is the main process function called by the Experiment Class'''

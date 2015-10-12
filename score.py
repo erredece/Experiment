@@ -14,9 +14,25 @@ def unravel(globalApp, stimulus):
     
     unravelscore = int(round((sum(stimulus) + 0.0) / (len(stimulus) + 0.0)
                               * 100))
+    blockname = ""
+    if globalApp.experimentalBlock == 1:
+        blockname = "Practice Block 1"
+    elif globalApp.experimentalBlock == 2:
+        blockname = "Practice Block 2"
+    elif globalApp.experimentalBlock == 3:
+        blockname = "Experimental Block 1"
+    elif globalApp.experimentalBlock == 4:
+        blockname = "Experimental Block 2"
+    elif globalApp.experimentalBlock == 5:
+        blockname = "Experimental Block 3"
+    elif globalApp.experimentalBlock == 6:
+        blockname = "Experimental Block 4"
+    else:
+        pass
     
-    uInstructions = tk.Label(c, text="You scored a " + 
-                             str(unravelscore) + "% in this block. \n\n\n" +
+    uInstructions = tk.Label(c, text="That is the end of " + blockname + 
+                             "\n\n\nYou " + "scored a " + str(unravelscore) + 
+                             "% in this block. \n\n\n" +
                              "Press any key to continue.",
     bg= globalApp.black, fg = globalApp.white, font="Helvetica 18", 
     anchor="center")
@@ -26,5 +42,7 @@ def unravel(globalApp, stimulus):
     
     c.create_window(windowwidth, windowheight, anchor="center", 
                     window=uInstructions) 
-    
-    globalApp.master.bind("<Key>", globalApp.unravel)
+    if globalApp.experimentalBlock <= 5:
+        globalApp.master.bind("<Key>", globalApp.unravelIntro)
+    else:
+        globalApp.master.bind("<Key>", globalApp.outro)

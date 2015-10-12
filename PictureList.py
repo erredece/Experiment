@@ -2,6 +2,7 @@ import Tkinter as tk
 
 showPicCounter = 0
 globalApp = None
+images = []
 
 def PictureList(app):
     global globalApp
@@ -10,9 +11,22 @@ def PictureList(app):
 
 def tick():
     global showPicCounter
-    images = ["ACCORDIO", "AIRPLANE", "ALLIGATO", "ANCHOR", "ANT"]
+    global images
+    if globalApp.experimentalBlock == 2:
+        images = ["SAW", "RABBIT", "SALTSHAK", "ANCHOR", "VIOLIN"]
     #Please note that the first image to be reproduced will be the last one of
     #the array. 
+    elif globalApp.experimentalBlock == 3:
+        images = ["ANT", "FRYINGPA", "GLASSES", "CAT", "ARM"]
+    elif globalApp.experimentalBlock == 4:
+        images = ["ARROW", "AIRPLANE", "BABYCARR", "EAGLE", "WINEGLAS"]
+    elif globalApp.experimentalBlock == 5:
+        images = ["WAGON", "WINDMILL", "HORSE", "HEART", "BUS"]
+    elif globalApp.experimentalBlock == 6:
+        images = ["CANDLE", "CAMEL", "CHURCH", "PEACOCK", "MOUNTAIN"]
+    else:
+        pass
+    
     if globalApp.frame:
         globalApp.frame.destroy()
         globalApp.frame = tk.Frame(globalApp.master, 
@@ -43,4 +57,3 @@ def tick():
     else:
         showPicCounter = 0
         globalApp.unravel(globalApp)
-    print showPicCounter

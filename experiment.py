@@ -3,6 +3,7 @@ import unravel as u #importing unravel
 import intro as i
 import unravelIntro as ui
 import PictureList as pic
+import outro as out
 import time
 
 
@@ -50,8 +51,18 @@ class Experiment: # Defining Fullscreen function.
         self.elapsedTime += 1
         self.master.after(1000, self.getElapsedTime)
     
-    def PictureList(self):
+    def PictureList(self, event):
         pic.PictureList(self)
+        
+    def outro(self, event):
+        out.outro(self)
+        
+    experimentalBlock = 1
+    
+    data1 = []
+    data2 = []
+    data3 = []
+    data4 = []
 
 root = tk.Tk() #Calls the Root frame
 globalApp=Experiment(root) # Fullscreen
