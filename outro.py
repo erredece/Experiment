@@ -24,4 +24,8 @@ def outro(globalApp):
     
     c.create_window(windowwidth, windowheight, anchor="center", 
                     window=outrotext) 
+    print globalApp.data1
+    print globalApp.data2
+    print globalApp.data3
+    print globalApp.data4
     globalApp.master.bind("<Key>", sys.exit)

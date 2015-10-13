@@ -25,6 +25,14 @@ def keyIsPressed(event):
     global UnravelStep
     global unravelCounter
     global globalApp
+    global memoryfontleft
+    global memoryfontright
+    global memoryposleft
+    global memoryposright
+    global memorytextleft
+    global memorytextright
+    global memorycolourleft
+    global memorycolourright
     key = event.char
     
     global unravelCounter
@@ -34,8 +42,18 @@ def keyIsPressed(event):
     else:
         unravelEngine()
         score.unravel(globalApp, stimulus)
-        UnravelStep = 1
+        print UnravelStep
+        print stimulus
+        UnravelStep = 0
         unravelCounter = 0
+        memoryfontleft = []
+        memoryfontright = []
+        memoryposleft = []
+        memoryposright = []
+        memorytextleft = []
+        memorytextright = []
+        memorycolourleft = []
+        memorycolourright = []
         if globalApp.experimentalBlock == 3:
             globalApp.data1 = stimulus
         elif globalApp.experimentalBlock == 4:
