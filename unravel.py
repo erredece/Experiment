@@ -16,6 +16,8 @@ memoryposleft = []
 memoryposright = [] 
 memorycolourleft = []
 memorycolourright = []
+numberofruns = 13 #Number of runs - 1
+stimulusGenerator = randint(4,8)
 
 def keyIsPressed(event):
     ''' Records the pressed key and calls the unravelBuilder function each time
@@ -33,12 +35,29 @@ def keyIsPressed(event):
     global memorytextright
     global memorycolourleft
     global memorycolourright
+    global numberofruns
+    global stimulusGenerator
+    global unravelCounter
+    
     key = event.char
     
-    global unravelCounter
-    if (unravelCounter <= 13): #Number of runs - 1
-        unravelBuilder()
-        
+    def rebind():
+        globalApp.master.bind("<Key>", keyIsPressed)
+    
+    globalApp.master.unbind("<Key>")
+    
+    if (unravelCounter <= numberofruns): 
+        globalApp.master.after(250, rebind) 
+        if globalApp.experimentalBlock == 1:
+            unravelBuilder()
+        else:
+            if unravelCounter % stimulusGenerator == 0:
+                unravelEngine()
+                globalApp.showPic(globalApp)
+                stimulusGenerator = randint(4,8)
+            else:
+                unravelBuilder()
+    
     else:
         unravelEngine()
         score.unravel(globalApp, stimulus)
@@ -64,15 +83,17 @@ def keyIsPressed(event):
             globalApp.data4 = stimulus
         else:
             pass
-        globalApp.experimentalBlock += 1
-        
+        globalApp.experimentalBlock += 1            
 
 def unravel(app):
     '''This is the main process function called by the Experiment Class'''
     global globalApp
     globalApp = app
     
-    globalApp.master.bind("<Key>", keyIsPressed)
+    globalApp.master.unbind("<Key>")
+    def unlockbind():
+        globalApp.master.bind("<Key>", keyIsPressed)
+    globalApp.master.after(250, unlockbind)
     unravelBuilder()
 
 def unravelBuilder():

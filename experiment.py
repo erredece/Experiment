@@ -4,6 +4,7 @@ import intro as i
 import unravelIntro as ui
 import PictureList as pic
 import outro as out
+import showPic as sp
 import time
 
 
@@ -53,16 +54,34 @@ class Experiment: # Defining Fullscreen function.
     
     def PictureList(self, event):
         pic.PictureList(self)
+    
+    def showPic(self, event):
+        sp.showPic(self)    
         
     def outro(self, event):
         out.outro(self)
         
     experimentalBlock = 1
     
+    images = []
+    
     data1 = []
     data2 = []
     data3 = []
     data4 = []
+    
+    imageaccuracypb = []
+    falsealarmpb = []
+    imageaccuracy1 = []
+    falsealarm1 = []
+    imageaccuracy2 = []
+    falsealarm2 = []
+    imageaccuracy3 = []
+    falsealarm3 = []
+    imageaccuracy4 = []
+    falsealarm4 = []
+    
+    stimulusPicCounter = 0
 
 root = tk.Tk() #Calls the Root frame
 globalApp=Experiment(root) # Fullscreen

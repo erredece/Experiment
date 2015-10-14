@@ -4,12 +4,15 @@ def intro(globalApp):
     
     if globalApp.frame:
         globalApp.frame.destroy()
-        globalApp.frame = tk.Frame(globalApp.master, width=globalApp.master.winfo_screenwidth(), 
-            height=globalApp.master.winfo_screenheight())
-        globalApp.frame.pack()
+        globalApp.frame = tk.Frame(globalApp.master, 
+                                width=globalApp.master.winfo_screenwidth(), 
+                                height=globalApp.master.winfo_screenheight())
+    globalApp.frame.pack()
     
-    introCanvas = tk.Canvas(globalApp.frame, width=globalApp.master.winfo_screenwidth(), 
-    height=globalApp.master.winfo_screenheight(), bg=globalApp.black, highlightthickness=0)
+    introCanvas = tk.Canvas(globalApp.frame, 
+                            width=globalApp.master.winfo_screenwidth(), 
+                            height=globalApp.master.winfo_screenheight(), 
+                            bg=globalApp.black, highlightthickness=0)
     
     introCanvas.pack()
     
@@ -19,12 +22,16 @@ def intro(globalApp):
     "screen \n\n\n\n You will also have to memorize a series of pictures and" +
     "then recognize them\n from a series of other pictures which  will be " +
     "rotated in 0, 90 and 180 degrees.\n\n\n\n Press any key to continue.",
-    bg= globalApp.black, fg = globalApp.white, font="Helvetica 18", anchor="center")
+    bg= globalApp.black, fg = globalApp.white, font="Helvetica 18", 
+    anchor="center")
     
     windowwidth = globalApp.master.winfo_screenwidth()/2
     windowheight = globalApp.master.winfo_screenheight()/2
     
     introCanvas.create_window(windowwidth, windowheight, anchor="center",
                                window=introtext) 
+     
+    def Start():
+        globalApp.master.bind("<Key>", globalApp.unravelIntro)
     
-    globalApp.master.bind("<Key>", globalApp.unravelIntro)
+    globalApp.master.after(1000, Start)

@@ -12,6 +12,8 @@ def unravel(globalApp, stimulus):
     
     c.pack()
     
+    globalApp.master.unbind("<Key>")
+    
     unravelscore = int(round((sum(stimulus) + 0.0) / (len(stimulus) + 0.0)
                               * 100))
     blockname = ""
@@ -42,7 +44,12 @@ def unravel(globalApp, stimulus):
     
     c.create_window(windowwidth, windowheight, anchor="center", 
                     window=uInstructions) 
-    if globalApp.experimentalBlock <= 5:
-        globalApp.master.bind("<Key>", globalApp.unravelIntro)
-    else:
-        globalApp.master.bind("<Key>", globalApp.outro)
+    
+    def Continue():
+        if globalApp.experimentalBlock <= 5:
+            globalApp.master.bind("<Key>", globalApp.unravelIntro)
+        else:
+            globalApp.master.bind("<Key>", globalApp.outro)
+    
+    globalApp.master.after(500, Continue)
+    

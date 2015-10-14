@@ -4,12 +4,14 @@ def intro(globalApp):
 
     if globalApp.frame:
         globalApp.frame.destroy()
-        globalApp.frame = tk.Frame(globalApp.master, width=globalApp.master.winfo_screenwidth(), 
-            height=globalApp.master.winfo_screenheight())
+        globalApp.frame = tk.Frame(globalApp.master, 
+                                   width=globalApp.master.winfo_screenwidth(), 
+                                   height=globalApp.master.winfo_screenheight())
         globalApp.frame.pack()
     
     c = tk.Canvas(globalApp.frame, width=globalApp.master.winfo_screenwidth(), 
-    height=globalApp.master.winfo_screenheight(), bg=globalApp.black, highlightthickness=0)
+    height=globalApp.master.winfo_screenheight(), 
+    bg=globalApp.black, highlightthickness=0)
     
     c.pack()
     
@@ -38,11 +40,12 @@ def intro(globalApp):
         textblock = ("Now you will perform the same UNRAVEL task, but before "
         "starting \n you will see a series of images that you have to memorize."
         "\n\nThen, while you perform the UNRAVEL task, you will be interrupted "
-        "at random steps to show\n a picture. You will have to reply if the "
-        "image was on the list you previously memorized.\n\n Press Enter if it "
-        "was on the list or press Space if not. You will have 3 seconds to "
-        "reply.\n\n This is the last practice block, and the experimental "
-        "blocks will consist on the same task.\n\n Press any key to continue. " 
+        "at random steps to show a picture.\nYou will have to reply if the "
+        "image, independently of its rotation, was on the list you previously "
+        "memorized.\n\n Press Enter if it was on the list or press Space if "
+        "not. You will have 3 seconds to reply.\n\n This is the last practice "
+        "block, and the experimental blocks will consist on the same task.\n\n"
+        "Press any key to continue. " 
         "Good luck!")
     elif globalApp.experimentalBlock == 3:
         textblock = ("This is the first experimental block. Remember that now "
@@ -55,8 +58,8 @@ def intro(globalApp):
         textblock = ("This is the third experimental block. \n\n Press any key "
         "to continue.")
     elif globalApp.experimentalBlock == 6:
-        textblock = ("This is the fourth and last experimental block. \n\n Press"
-        " any key to continue.")
+        textblock = ("This is the fourth and last experimental block. \n\n"
+        "Press any key to continue.")
     else:
         pass
     
@@ -69,7 +72,14 @@ def intro(globalApp):
     
     c.create_window(windowwidth, windowheight, anchor="center", 
                     window=uInstructions) 
-    if globalApp.experimentalBlock == 1:
-        globalApp.master.bind("<Key>", globalApp.unravel)
-    else:
-        globalApp.master.bind("<Key>", globalApp.PictureList)
+    
+    globalApp.master.unbind("<Key>")
+    
+    def Continue():
+        if globalApp.experimentalBlock == 1:
+            globalApp.master.bind("<Key>", globalApp.unravel)
+        else:
+            globalApp.master.bind("<Key>", globalApp.PictureList)
+    
+    globalApp.master.after(250,Continue)
+    

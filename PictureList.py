@@ -1,29 +1,30 @@
 import Tkinter as tk
 
-showPicCounter = 0
+PictureListCounter = 0
 globalApp = None
-images = []
+
 
 def PictureList(app):
     global globalApp
     globalApp = app
+    globalApp.master.unbind("<Key>")
     tick()
 
 def tick():
-    global showPicCounter
-    global images
+    global PictureListCounter
     if globalApp.experimentalBlock == 2:
-        images = ["SAW", "RABBIT", "SALTSHAK", "ANCHOR", "VIOLIN"]
+        globalApp.images = ["SAW", "RABBIT", "SALTSHAK", "ANCHOR", "VIOLIN"]
     #Please note that the first image to be reproduced will be the last one of
     #the array. 
     elif globalApp.experimentalBlock == 3:
-        images = ["ANT", "FRYINGPA", "GLASSES", "CAT", "ARM"]
+        globalApp.images = ["ANT", "FRYINGPA", "GLASSES", "CAT", "STOVE"]
     elif globalApp.experimentalBlock == 4:
-        images = ["ARROW", "AIRPLANE", "BABYCARR", "EAGLE", "WINEGLAS"]
+        globalApp.images = ["ARROW", "AIRPLANE", "BABYCARR", "EAGLE",
+                             "WINEGLAS"]
     elif globalApp.experimentalBlock == 5:
-        images = ["WAGON", "WINDMILL", "HORSE", "HEART", "BUS"]
+        globalApp.images = ["WAGON", "WINDMILL", "HORSE", "HEART", "BUS"]
     elif globalApp.experimentalBlock == 6:
-        images = ["CANDLE", "CAMEL", "CHURCH", "PEACOCK", "MOUNTAIN"]
+        globalApp.images = ["CANDLE", "CAMEL", "CHURCH", "PEACOCK", "MOUNTAIN"]
     else:
         pass
     
@@ -41,7 +42,8 @@ def tick():
     pictures.pack()
     
     
-    pic = tk.PhotoImage(file="pics/" + images[showPicCounter - 1] + ".gif")
+    pic = tk.PhotoImage(file="pics/" + globalApp.images[PictureListCounter - 1] +
+                         ".gif")
     piclabel = tk.Label(pictures, image=pic)
     piclabel.config(image=pic) 
     piclabel.image = pic # keep a reference!  
@@ -51,9 +53,9 @@ def tick():
                                globalApp.master.winfo_screenheight()/2, 
                                anchor="center", window=piclabel)  
     
-    if showPicCounter <= len(images) -1 :
-        showPicCounter += 1
+    if PictureListCounter <= len(globalApp.images) -1 :
+        PictureListCounter += 1
         globalApp.master.after(3000, tick)
     else:
-        showPicCounter = 0
+        PictureListCounter = 0
         globalApp.unravel(globalApp)
