@@ -74,8 +74,11 @@ def showPic(app):
     
     globalApp.stimulusPicCounter+= 1
     
-    globalApp.master.bind("<Return>", recognizedStimulus)
-    globalApp.master.bind("<space>", notrecognizedStimulus)
+    def rebind():    
+        globalApp.master.bind("<Return>", recognizedStimulus)
+        globalApp.master.bind("<space>", notrecognizedStimulus)
+        
+    globalApp.master.after(500, rebind)
 
     globalApp.master.after(3000, timedOut)
     

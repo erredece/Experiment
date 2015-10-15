@@ -1,5 +1,6 @@
 import Tkinter as tk # importing Tkinter, change for tkinter when using Python 3
 import unravel as u #importing unravel
+import demographics as demo
 import intro as i
 import unravelIntro as ui
 import PictureList as pic
@@ -34,6 +35,9 @@ class Experiment: # Defining Fullscreen function.
         print(geom,self._geom)
         self.master.geometry(self._geom)
         self._geom=geom
+        
+    def demographics(self):
+        demo.demographics(self)
 
     def intro(self):
         i.intro(self)
@@ -89,6 +93,6 @@ root.configure(bg=globalApp.black, cursor="none") #Root settings, black backgrou
 root.overrideredirect(1) # Hides header
 
 #globalApp.PictureList()
-globalApp.intro()
+globalApp.demographics()
 
 root.mainloop() #Runs root

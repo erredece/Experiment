@@ -39,7 +39,7 @@ def keyIsPressed(event):
     global stimulusGenerator
     global unravelCounter
     
-    key = event.char
+    key = event.char    
     
     def rebind():
         globalApp.master.bind("<Key>", keyIsPressed)
@@ -47,22 +47,24 @@ def keyIsPressed(event):
     globalApp.master.unbind("<Key>")
     
     if (unravelCounter <= numberofruns): 
-        globalApp.master.after(250, rebind) 
         if globalApp.experimentalBlock == 1:
+            globalApp.master.after(250, rebind) 
             unravelBuilder()
         else:
             if unravelCounter % stimulusGenerator == 0:
                 unravelEngine()
+                unravelCounter -= 1
+                UnravelStep -= 1
+                globalApp.master.unbind("<Key>")
                 globalApp.showPic(globalApp)
                 stimulusGenerator = randint(4,8)
             else:
+                globalApp.master.after(250, rebind) 
                 unravelBuilder()
     
     else:
         unravelEngine()
         score.unravel(globalApp, stimulus)
-        print UnravelStep
-        print stimulus
         UnravelStep = 0
         unravelCounter = 0
         memoryfontleft = []
@@ -138,7 +140,7 @@ def unravelBuilder():
     characters = letters + numbers
     positions = [1, 2, 2, 3] #2 is duplicated to have 50% inside the box
     
-    positionleft = positions[randint(0, len(positions)-1)]  
+    positionleft = positions[randint(0, len(positions) - 1)]  
     textleft = characters[randint(0,
                                   len(characters)-1)] #Test for the text in box
     colourleft = choice([globalApp.white, globalApp.white, 
@@ -457,3 +459,6 @@ def unravelEngine():
         stimulus = []
         
     unravelCounter += 1
+    print stimulus
+    print unravelCounter
+    print UnravelStep
