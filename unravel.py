@@ -85,6 +85,7 @@ def keyIsPressed(event):
             globalApp.data4 = stimulus
         else:
             pass
+        globalApp.stimulusPicCounter = 0
         globalApp.experimentalBlock += 1            
 
 def unravel(app):

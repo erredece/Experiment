@@ -9,14 +9,14 @@ import showPic as sp
 import time
 
 
-class Experiment: # Defining Fullscreen function.    
+class Experiment: # Defining Fullscreen function.
+        
     def __init__(self, master, **kwargs):
         '''Initializing function'''
         self.master = master
-        pad = 0
         self._geom = '1000x500+0+0'
         master.geometry("{0}x{1}+0+0".format(
-            master.winfo_screenwidth()-pad, master.winfo_screenheight()-pad))
+            master.winfo_screenwidth(), master.winfo_screenheight()))
         master.bind('<F1>', self.toggle_geom)     # This sets the key to toggle 
 # out and in of the fullscreen, so it is possible to close the experiment in
 # case of any technical issue.
@@ -64,6 +64,10 @@ class Experiment: # Defining Fullscreen function.
         
     def outro(self, event):
         out.outro(self)
+        
+    gender = ""
+    age = 0
+    ID = 0
         
     experimentalBlock = 1
     

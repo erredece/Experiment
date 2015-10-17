@@ -46,7 +46,7 @@ def unravel(globalApp, stimulus):
                     window=uInstructions) 
     
     def Continue():
-        if globalApp.experimentalBlock <= 5:
+        if globalApp.experimentalBlock <= 6:
             globalApp.master.bind("<Key>", globalApp.unravelIntro)
         else:
             globalApp.master.bind("<Key>", globalApp.outro)
