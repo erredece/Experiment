@@ -65,7 +65,7 @@ class Experiment: # Defining Fullscreen function.
     def outro(self, event):
         out.outro(self)
         
-    gender = ""
+    gender = 0
     age = 0
     ID = 0
         

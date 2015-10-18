@@ -29,11 +29,11 @@ def demographics(globalApp):
         checkID = False
         missingtext = "       Please introduce your data.     "
         if male.get() == 1 and female.get() == 0:
-            globalApp.gender = "M"
+            globalApp.gender = 1
             checkgender = True
 
         elif female.get() == 1 and male.get() == 0:
-            globalApp.gender = "F"
+            globalApp.gender = 2
             checkgender = True
         else:
             checkgender = False
@@ -114,3 +114,5 @@ def demographics(globalApp):
                     window=abort)  
     c.create_window(windowwidth+50, windowheight+120, anchor="center", 
                     window=startbutton)  
+
+

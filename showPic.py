@@ -137,29 +137,34 @@ def notrecognizedStimulus(event):
     timerswitch = 0
     
     if globalApp.experimentalBlock == 2:
+        globalApp.falsealarmpb.append(0)
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracypb.append(0)
         else:
             globalApp.imageaccuracypb.append(1)
     elif globalApp.experimentalBlock == 3:
+        globalApp.falsealarm1.append(0)
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy1.append(0)
         else:
             globalApp.imageaccuracy1.append(1)
             
     elif globalApp.experimentalBlock == 4:
+        globalApp.falsealarm2.append(0)
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy2.append(0)
         else:
             globalApp.imageaccuracy2.append(1)
             
     elif globalApp.experimentalBlock == 5:
+        globalApp.falsealarm3.append(0)
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy3.append(0)
         else:
             globalApp.imageaccuracy3.append(1)
             
     elif globalApp.experimentalBlock == 6:
+        globalApp.falsealarm4.append(0)
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy4.append(0)
         else:

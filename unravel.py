@@ -16,8 +16,9 @@ memoryposleft = []
 memoryposright = [] 
 memorycolourleft = []
 memorycolourright = []
-numberofruns = 13 #Number of runs - 1
-stimulusGenerator = randint(4,8)
+numberofruns = 48 #Number of runs - 1
+stimulusGenerator = randint(4,6)
+generatorcounter = 0
 
 def keyIsPressed(event):
     ''' Records the pressed key and calls the unravelBuilder function each time
@@ -38,6 +39,12 @@ def keyIsPressed(event):
     global numberofruns
     global stimulusGenerator
     global unravelCounter
+    global generatorcounter
+    
+    print unravelCounter
+    print generatorcounter
+    print stimulusGenerator
+    print "---"
     
     key = event.char    
     
@@ -51,13 +58,29 @@ def keyIsPressed(event):
             globalApp.master.after(250, rebind) 
             unravelBuilder()
         else:
-            if unravelCounter % stimulusGenerator == 0:
+            if unravelCounter == stimulusGenerator:
+                generatorcounter += 1
                 unravelEngine()
                 unravelCounter -= 1
                 UnravelStep -= 1
                 globalApp.master.unbind("<Key>")
                 globalApp.showPic(globalApp)
-                stimulusGenerator = randint(4,8)
+                if unravelCounter  >= 25 and unravelCounter < 40:
+                    if generatorcounter <= 5:
+                        stimulusGenerator += randint(3,5)
+                    else:
+                        stimulusGenerator += randint(4,6)
+                elif unravelCounter >= 40 and generatorcounter != 10:
+                    if generatorcounter < 8 and unravelCounter <=43:
+                        stimulusGenerator +=3
+                    elif generatorcounter == 8 and unravelCounter <= 42:
+                        stimulusGenerator +=4
+                    else:
+                        stimulusGenerator += randint(3,5)
+                elif generatorcounter == 10:
+                    pass
+                else:
+                    stimulusGenerator += randint(4,6)
             else:
                 globalApp.master.after(250, rebind) 
                 unravelBuilder()
@@ -86,7 +109,9 @@ def keyIsPressed(event):
         else:
             pass
         globalApp.stimulusPicCounter = 0
-        globalApp.experimentalBlock += 1            
+        globalApp.experimentalBlock += 1     
+        generatorcounter = 0    
+        stimulusGenerator = randint(4,6)   
 
 def unravel(app):
     '''This is the main process function called by the Experiment Class'''
@@ -460,6 +485,3 @@ def unravelEngine():
         stimulus = []
         
     unravelCounter += 1
-    print stimulus
-    print unravelCounter
-    print UnravelStep
