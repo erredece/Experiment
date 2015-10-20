@@ -57,14 +57,3 @@ def unravel(globalApp, stimulus):
             globalApp.master.bind("<Key>", globalApp.outro)
     
     globalApp.master.after(500, Continue)
-    
-    print globalApp.imageaccuracypb
-    print globalApp.falsealarmpb
-    print globalApp.imageaccuracy1
-    print globalApp.falsealarm1
-    print globalApp.imageaccuracy2
-    print globalApp.falsealarm2
-    print globalApp.imageaccuracy3
-    print globalApp.falsealarm3
-    print globalApp.imageaccuracy4
-    print globalApp.falsealarm4
