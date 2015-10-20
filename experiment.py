@@ -13,17 +13,25 @@ class Experiment: # Defining Fullscreen function.
         
     def __init__(self, master, **kwargs):
         '''Initializing function'''
+        
+        '''DEBUGGING F1 TOGGLE, DELETE THIS LINE AND THE LINE AFTER THE CODE 
+        TO ACTIVATE
+        
+        This sets the key to toggle 
+        out and in of the fullscreen, so it is possible to close the experiment 
+        in case of any technical issue.'''
         self.master = master
         self._geom = '1000x500+0+0'
         master.geometry("{0}x{1}+0+0".format(
             master.winfo_screenwidth(), master.winfo_screenheight()))
-        master.bind('<F1>', self.toggle_geom)     # This sets the key to toggle 
-# out and in of the fullscreen, so it is possible to close the experiment in
-# case of any technical issue.
-
-        self.frame = tk.Frame(self.master, width=self.master.winfo_screenwidth(), 
-            height=self.master.winfo_screenheight(), bg=self.black)
+        master.bind('<F1>', self.toggle_geom)     # 
+        self.frame = tk.Frame(self.master, 
+                              width=self.master.winfo_screenwidth(), 
+                              height=self.master.winfo_screenheight(), 
+                              bg=self.black)
         self.frame.pack()  
+        
+        '''DELETE THIS LINE TOO FOR ACTIVATING THE F1 DEBUG'''
     
     black = "#000" #Defining black
     white = "#fff" #Defining white

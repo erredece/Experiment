@@ -41,11 +41,6 @@ def keyIsPressed(event):
     global unravelCounter
     global generatorcounter
     
-    print unravelCounter
-    print generatorcounter
-    print stimulusGenerator
-    print "---"
-    
     key = event.char    
     
     def rebind():
