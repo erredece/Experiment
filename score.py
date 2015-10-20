@@ -14,8 +14,9 @@ def unravel(globalApp, stimulus):
     
     globalApp.master.unbind("<Key>")
     
-    unravelscore = int(round((sum(stimulus) + 0.0) / (len(stimulus) + 0.0)
-                              * 100))
+    blockscore = (sum(stimulus) + 0.0) / (len(stimulus) + 0.0) * 100
+    
+    unravelscore = int(round(blockscore))
     blockname = ""
     if globalApp.experimentalBlock == 1:
         blockname = "Practice Block 1"
@@ -23,11 +24,15 @@ def unravel(globalApp, stimulus):
         blockname = "Practice Block 2"
     elif globalApp.experimentalBlock == 3:
         blockname = "Experimental Block 1"
+        globalApp.pdata1 = blockscore
     elif globalApp.experimentalBlock == 4:
+        globalApp.pdata2 = blockscore
         blockname = "Experimental Block 2"
     elif globalApp.experimentalBlock == 5:
+        globalApp.pdata3 = blockscore
         blockname = "Experimental Block 3"
     elif globalApp.experimentalBlock == 6:
+        globalApp.pdata4 = blockscore
         blockname = "Experimental Block 4"
     else:
         pass

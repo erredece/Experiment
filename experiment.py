@@ -78,6 +78,11 @@ class Experiment: # Defining Fullscreen function.
     data3 = []
     data4 = []
     
+    pdata1 = 0
+    pdata2 = 0
+    pdata3 = 0
+    pdata4 = 0
+    
     imageaccuracypb = []
     falsealarmpb = []
     imageaccuracy1 = []

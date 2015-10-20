@@ -55,7 +55,7 @@ def keyIsPressed(event):
     
     if (unravelCounter <= numberofruns): 
         if globalApp.experimentalBlock == 1:
-            globalApp.master.after(250, rebind) 
+            globalApp.master.after(300, rebind) 
             unravelBuilder()
         else:
             if unravelCounter == stimulusGenerator:
@@ -65,16 +65,18 @@ def keyIsPressed(event):
                 UnravelStep -= 1
                 globalApp.master.unbind("<Key>")
                 globalApp.showPic(globalApp)
-                if unravelCounter  >= 25 and unravelCounter < 40:
+                if unravelCounter  >= 25 and unravelCounter < 38:
                     if generatorcounter <= 5:
                         stimulusGenerator += randint(3,5)
                     else:
                         stimulusGenerator += randint(4,6)
-                elif unravelCounter >= 40 and generatorcounter != 10:
-                    if generatorcounter < 8 and unravelCounter <=43:
+                elif unravelCounter >= 38 and generatorcounter != 10:
+                    if generatorcounter < 8 and unravelCounter <=40:
                         stimulusGenerator +=3
                     elif generatorcounter == 8 and unravelCounter <= 42:
-                        stimulusGenerator +=4
+                        stimulusGenerator +=3
+                    elif generatorcounter == 9 and unravelCounter == 44:
+                        stimulusGenerator = 48
                     else:
                         stimulusGenerator += randint(3,5)
                 elif generatorcounter == 10:
@@ -82,7 +84,7 @@ def keyIsPressed(event):
                 else:
                     stimulusGenerator += randint(4,6)
             else:
-                globalApp.master.after(250, rebind) 
+                globalApp.master.after(300, rebind) 
                 unravelBuilder()
     
     else:
@@ -121,7 +123,7 @@ def unravel(app):
     globalApp.master.unbind("<Key>")
     def unlockbind():
         globalApp.master.bind("<Key>", keyIsPressed)
-    globalApp.master.after(250, unlockbind)
+    globalApp.master.after(300, unlockbind)
     unravelBuilder()
 
 def unravelBuilder():
@@ -138,25 +140,23 @@ def unravelBuilder():
         globalApp.frame.pack()
         
     globalApp.Recording = True
-    screen_width = globalApp.master.winfo_screenwidth() #Calculates the screen width
-    screen_height = globalApp.master.winfo_screenheight() #Idem, height
+    screen_height = globalApp.master.winfo_screenheight() #Calculates the screen height
            
-    top = tk.Canvas(globalApp.frame, width=screen_width/5, 
+    top = tk.Canvas(globalApp.frame, width=273, 
                     height=screen_height/3+50, 
                     bg=globalApp.black, highlightthickness=0) #Top Canvas      
     top.pack()
 
-    mid = tk.Canvas(globalApp.frame, width=screen_width/5, 
-                    height=screen_height/4 - 60 , 
+    mid = tk.Canvas(globalApp.frame, width=273, height=132, 
                     bg=globalApp.black, highlightthickness=0) #Mid canvas
-    mid.create_rectangle(screen_width/5 - 20, screen_height/4 - 60,
+    mid.create_rectangle(250, 132,
                           10, 10, fill=globalApp.black, 
                           outline= globalApp.white,
                           width=4) #Creates rectangle  
 
     mid.pack()
     
-    bot = tk.Canvas(globalApp.frame, width=screen_width/5, 
+    bot = tk.Canvas(globalApp.frame, width=273, 
                     height=screen_height/3, 
                     bg=globalApp.black, highlightthickness=0)
     bot.pack()
@@ -230,7 +230,7 @@ def unravelBuilder():
                             fg=colourright, font = UnravelFont + 
                             fontright, anchor ="center") #Top right properties
         
-        top.create_window(screen_width/5-80, screen_height/3, width=80,
+        top.create_window(192, screen_height/3, width=80,
                           height=100, window=topright, anchor="center")  
     elif positionright == 2:
          
@@ -239,7 +239,7 @@ def unravelBuilder():
                             UnravelFont + fontright,
                             anchor="center") #Right char properties
     
-        mid.create_window(screen_width/5-80, 70, width=80, 
+        mid.create_window(192, 70, width=80, 
                           height=100, window=insideBoxright,
                           anchor="center") #Right char window
         
@@ -248,7 +248,7 @@ def unravelBuilder():
                             fg=colourright, font= UnravelFont + 
                             fontright, anchor= "center")
         
-        bot.create_window(screen_width/5-80, 50, width=80, height=100,
+        bot.create_window(192, 50, width=80, height=100,
                           window=botright, anchor="center")
 
     unravelEngine()

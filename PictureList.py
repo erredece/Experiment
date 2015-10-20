@@ -1,4 +1,5 @@
 import Tkinter as tk
+from random import shuffle
 
 PictureListCounter = 0
 globalApp = None
@@ -12,21 +13,26 @@ def PictureList(app):
 
 def tick():
     global PictureListCounter
-    if globalApp.experimentalBlock == 2:
+    if globalApp.experimentalBlock == 2 and PictureListCounter == 0:
         globalApp.images = ["SAW", "RABBIT", "SALTSHAK", "ANCHOR", "VIOLIN"]
-    #Please note that the first image to be reproduced will be the last one of
-    #the array. 
-    elif globalApp.experimentalBlock == 3:
+        shuffle(globalApp.images)
+    elif globalApp.experimentalBlock == 3 and PictureListCounter == 0:
         globalApp.images = ["ANT", "FRYINGPA", "GLASSES", "CAT", "STOVE"]
-    elif globalApp.experimentalBlock == 4:
+        shuffle(globalApp.images)
+    elif globalApp.experimentalBlock == 4 and PictureListCounter == 0:
         globalApp.images = ["ARROW", "AIRPLANE", "BABYCARR", "EAGLE",
                              "WINEGLAS"]
-    elif globalApp.experimentalBlock == 5:
+        shuffle(globalApp.images)
+    elif globalApp.experimentalBlock == 5 and PictureListCounter == 0:
         globalApp.images = ["WAGON", "WINDMILL", "HORSE", "HEART", "BUS"]
-    elif globalApp.experimentalBlock == 6:
+        shuffle(globalApp.images)
+    elif globalApp.experimentalBlock == 6 and PictureListCounter == 0:
         globalApp.images = ["CANDLE", "CAMEL", "CHURCH", "PEACOCK", "MOUNTAIN"]
+        shuffle(globalApp.images)
     else:
         pass
+    
+
     
     if globalApp.frame:
         globalApp.frame.destroy()

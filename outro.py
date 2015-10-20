@@ -44,6 +44,8 @@ def outro(globalApp):
     
     
     maindata = [str(globalApp.ID), str(globalApp.gender), str(globalApp.age),
+                str(globalApp.pdata1), str(globalApp.pdata2), 
+                str(globalApp.pdata3), str(globalApp.pdata4),
                 str(paccuracy1), str(pfalsealarm1), str(paccuracy2), 
                 str(pfalsealarm2), str(paccuracy3), str(pfalsealarm3),
                 str(paccuracy4), str(pfalsealarm4)]
@@ -54,7 +56,7 @@ def outro(globalApp):
     f.close()
     
     pfile = open("data/participant_"+ str(globalApp.ID) + ".txt", "a")
-    for i in range(0, 9):
+    for i in range(0, 10):
         pfile.write(str(globalApp.imageaccuracy1[i]) + " " + 
                     str(globalApp.falsealarm1[i]) + " " +
                     str(globalApp.imageaccuracy2[i]) + " " + 
