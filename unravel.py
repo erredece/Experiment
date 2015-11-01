@@ -60,22 +60,22 @@ def keyIsPressed(event):
                 UnravelStep -= 1
                 globalApp.master.unbind("<Key>")
                 globalApp.showPic(globalApp)
-                if unravelCounter  >= 25 and unravelCounter < 38:
+                if unravelCounter  >= 25 and unravelCounter < 35:
                     if generatorcounter <= 5:
                         stimulusGenerator += randint(3,5)
                     else:
                         stimulusGenerator += randint(4,6)
-                elif unravelCounter >= 38 and generatorcounter != 10:
-                    if generatorcounter < 8 and unravelCounter <=40:
+                elif unravelCounter >= 35 and generatorcounter != 10:
+                    if generatorcounter <= 6 and unravelCounter <=35:
                         stimulusGenerator +=3
-                    elif generatorcounter == 8 and unravelCounter <= 42:
+                    elif generatorcounter == 7 and unravelCounter == 40:
                         stimulusGenerator +=3
                     elif generatorcounter == 9 and unravelCounter == 44:
                         stimulusGenerator = 48
                     else:
                         stimulusGenerator += randint(3,5)
-                elif generatorcounter == 10:
-                    pass
+                elif generatorcounter >= 10:
+                    stimulusGenerator += 0
                 else:
                     stimulusGenerator += randint(4,6)
             else:
@@ -105,6 +105,9 @@ def keyIsPressed(event):
             globalApp.data4 = stimulus
         else:
             pass
+        if globalApp.experimentalBlock > 2:
+            print globalApp.phasecounter
+            globalApp.phasecounter += 1
         globalApp.stimulusPicCounter = 0
         globalApp.experimentalBlock += 1     
         generatorcounter = 0    

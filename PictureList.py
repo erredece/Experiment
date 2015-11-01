@@ -16,17 +16,17 @@ def tick():
     if globalApp.experimentalBlock == 2 and PictureListCounter == 0:
         globalApp.images = ["SAW", "RABBIT", "SALTSHAK", "ANCHOR", "VIOLIN"]
         shuffle(globalApp.images)
-    elif globalApp.experimentalBlock == 3 and PictureListCounter == 0:
-        globalApp.images = ["ANT", "FRYINGPA", "GLASSES", "CAT", "STOVE"]
-        shuffle(globalApp.images)
-    elif globalApp.experimentalBlock == 4 and PictureListCounter == 0:
+    elif globalApp.variable[globalApp.phasecounter] == "control" and PictureListCounter == 0:
         globalApp.images = ["ARROW", "AIRPLANE", "BABYCARR", "EAGLE",
                              "WINEGLAS"]
         shuffle(globalApp.images)
-    elif globalApp.experimentalBlock == 5 and PictureListCounter == 0:
+    elif globalApp.variable[globalApp.phasecounter] == "90" and PictureListCounter == 0:
+        globalApp.images = ["ANT", "FRYINGPA", "GLASSES", "CAT", "STOVE"]
+        shuffle(globalApp.images)
+    elif globalApp.variable[globalApp.phasecounter] == "180" and PictureListCounter == 0:
         globalApp.images = ["WAGON", "WINDMILL", "HORSE", "HEART", "BUS"]
         shuffle(globalApp.images)
-    elif globalApp.experimentalBlock == 6 and PictureListCounter == 0:
+    elif globalApp.variable[globalApp.phasecounter] == "mix" and PictureListCounter == 0:
         globalApp.images = ["CANDLE", "CAMEL", "CHURCH", "PEACOCK", "MOUNTAIN"]
         shuffle(globalApp.images)
     else:

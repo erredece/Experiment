@@ -26,51 +26,45 @@ def showPic(app):
                          bg=globalApp.black, highlightthickness=0)
     imageCanvas.pack()
     
+    imagefolder = ""
+    
     global imagestimulus
+    print globalApp.stimulusPicCounter
     
     if globalApp.experimentalBlock == 2:
+        imagefolder = "pics/pb/"
         if globalApp.stimulusPicCounter == 0:
             imagestimulus = ["ANCHOR", "FOX", "RABBIT", "SAILBOAT", "SALTSHAK",
                          "SAW", "SPIDER", "TRAFFICL", "UMBRELLA", "VIOLIN"]
             shuffle(imagestimulus)
-
-    elif globalApp.experimentalBlock == 3:
-        if globalApp.stimulusPicCounter == 0:
-            imagestimulus = ["ANT", "ARM", "CAT", "FRENCHHO", "FRYINGPA", 
-                         "GARBAGEC", "GLASSES", "KANGAROO", "STOVE", "TABLE"] 
-            shuffle(imagestimulus)
-    elif globalApp.experimentalBlock == 4:
+    elif globalApp.variable[globalApp.phasecounter] == "control":
+        imagefolder = "pics/"    
+        
         if globalApp.stimulusPicCounter == 0:
             imagestimulus = ["ACCORDIO", "AIRPLANE", "ARROW", "BABYCARR",  
                          "CAKE", "CATERPIL", "EAGLE", "PIANO", "TRUCK", 
                          "WINEGLAS"]
             shuffle(imagestimulus)
-    elif globalApp.experimentalBlock == 5:
+    elif globalApp.variable[globalApp.phasecounter] == "90":
+        imagefolder = "pics/e2/"
+        if globalApp.stimulusPicCounter == 0:
+            imagestimulus = ["ANT", "ARM", "CAT", "FRENCHHO", "FRYINGPA", 
+             "GARBAGEC", "GLASSES", "KANGAROO", "STOVE", "TABLE"] 
+            shuffle(imagestimulus)
+    elif globalApp.variable[globalApp.phasecounter] == "180":
+        imagefolder = "pics/e3/"
         if globalApp.stimulusPicCounter == 0:
             imagestimulus = ["BICYCLE", "BUS", "DUCK", "GRASSHOP", "HEART", 
                          "HORSE", "KETTLE", "SCISSORS", "WAGON", "WINDMILL"]
             shuffle(imagestimulus)
-    elif globalApp.experimentalBlock ==6:
+    elif globalApp.variable[globalApp.phasecounter] == "mix":
+        imagefolder = "pics/e4/"
         if globalApp.stimulusPicCounter == 0:
             imagestimulus = ["BOTTLE", "BREAD", "CAMEL", "CANDLE", "CHURCH", 
                          "KEY", "LOCK", "MOUNTAIN", "MUSHROOM", "PEACOCK"]
             shuffle(imagestimulus)
     else:
         pass
-        
-    imagefolder = ""
-    if globalApp.experimentalBlock == 2:
-        imagefolder = "pics/pb/"
-    elif globalApp.experimentalBlock == 3:
-        imagefolder = "pics/e1/"    
-    elif globalApp.experimentalBlock == 4:
-        imagefolder = "pics/e2/"
-    elif globalApp.experimentalBlock == 5:
-        imagefolder = "pics/e3/"
-    elif globalApp.experimentalBlock == 6:
-        imagefolder = "pics/e4/"
-    else:
-        imagefolder = "pics/"
     
     if globalApp.stimulusPicCounter == 9:
         imagestimulus.append(" ")
@@ -112,7 +106,7 @@ def recognizedStimulus(event):
         else:
             globalApp.imageaccuracypb.append(0)
             globalApp.falsealarmpb.append(1)
-    elif globalApp.experimentalBlock == 3:
+    elif globalApp.variable[globalApp.phasecounter] == "control":
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy1.append(1)
             globalApp.falsealarm1.append(0)
@@ -120,7 +114,7 @@ def recognizedStimulus(event):
             globalApp.imageaccuracy1.append(0)
             globalApp.falsealarm1.append(1)
             
-    elif globalApp.experimentalBlock == 4:
+    elif globalApp.variable[globalApp.phasecounter] == "90":
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy2.append(1)
             globalApp.falsealarm2.append(0)
@@ -128,7 +122,7 @@ def recognizedStimulus(event):
             globalApp.imageaccuracy2.append(0)
             globalApp.falsealarm2.append(1)
             
-    elif globalApp.experimentalBlock == 5:
+    elif globalApp.variable[globalApp.phasecounter] == "180":
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy3.append(1)
             globalApp.falsealarm3.append(0)
@@ -136,7 +130,7 @@ def recognizedStimulus(event):
             globalApp.imageaccuracy3.append(0)
             globalApp.falsealarm3.append(1)
             
-    elif globalApp.experimentalBlock == 6:
+    elif globalApp.variable[globalApp.phasecounter] == "mix":
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy4.append(1)
             globalApp.falsealarm4.append(0)
@@ -160,28 +154,28 @@ def notrecognizedStimulus(event):
             globalApp.imageaccuracypb.append(0)
         else:
             globalApp.imageaccuracypb.append(1)
-    elif globalApp.experimentalBlock == 3:
+    elif globalApp.variable[globalApp.phasecounter] == "control":
         globalApp.falsealarm1.append(0)
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy1.append(0)
         else:
             globalApp.imageaccuracy1.append(1)
             
-    elif globalApp.experimentalBlock == 4:
+    elif globalApp.variable[globalApp.phasecounter] == "90":
         globalApp.falsealarm2.append(0)
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy2.append(0)
         else:
             globalApp.imageaccuracy2.append(1)
             
-    elif globalApp.experimentalBlock == 5:
+    elif globalApp.variable[globalApp.phasecounter] == "180":
         globalApp.falsealarm3.append(0)
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy3.append(0)
         else:
             globalApp.imageaccuracy3.append(1)
             
-    elif globalApp.experimentalBlock == 6:
+    elif globalApp.variable[globalApp.phasecounter] == "mix":
         globalApp.falsealarm4.append(0)
         if imagestimulus[globalApp.stimulusPicCounter] in globalApp.images:
             globalApp.imageaccuracy4.append(0)
@@ -200,19 +194,19 @@ def timedOut():
             globalApp.falsealarmpb.append(0)
             globalApp.imageaccuracypb.append(0)
 
-        elif globalApp.experimentalBlock == 3:
+        elif globalApp.variable[globalApp.phasecounter] == "control":
             globalApp.falsealarm1.append(0)
             globalApp.imageaccuracy1.append(0)
                 
-        elif globalApp.experimentalBlock == 4:
+        elif globalApp.variable[globalApp.phasecounter] == "90":
             globalApp.falsealarm2.append(0)
             globalApp.imageaccuracy2.append(0)               
 
-        elif globalApp.experimentalBlock == 5:
+        elif globalApp.variable[globalApp.phasecounter] == "180":
             globalApp.falsealarm3.append(0)
             globalApp.imageaccuracy3.append(0)
   
-        elif globalApp.experimentalBlock == 6:
+        elif globalApp.variable[globalApp.phasecounter] == "mix":
             globalApp.imageaccuracy4.append(0)
             globalApp.falsealarm4.append(0)
 
